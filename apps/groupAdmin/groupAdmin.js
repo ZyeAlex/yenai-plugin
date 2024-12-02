@@ -45,7 +45,7 @@ export class GroupAdmin extends plugin {
           fnc: "adminsetTitle"
         },
         {
-          reg: "^#(申请|我要)头衔",
+          reg: "^#?(群主)?(申请|我要|给我?个)头衔",
           fnc: "SetGroupSpecialTitle"
         },
         {
@@ -207,7 +207,7 @@ export class GroupAdmin extends plugin {
    */
   async SetGroupSpecialTitle(e) {
     if (!common.checkPermission(e, "all", "owner")) return
-    let Title = e.msg.replace(/#(申请|我要)头衔/g, "")
+    let Title = e.msg.replace(/#?(群主)?(申请|我要|给我?个)头衔\s+/g, "")
     // 屏蔽词处理
     let TitleFilterModeChange = GroupBannedWords.getTitleFilterModeChange(e.group_id)
     let TitleBannedWords = GroupBannedWords.getTitleBannedWords(e.group_id)
